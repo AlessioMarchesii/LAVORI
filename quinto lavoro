@@ -1,0 +1,161 @@
+<html>
+
+<head>
+	<title>lavoro n2</title>
+</head>
+
+<body>
+<script>
+function stampa() 
+{
+var print=document.getElementById("name").value;
+document.getElementById("numero1").innerHTML=print;
+
+var print=document.getElementById("surname").value;
+document.getElementById("numero2").innerHTML=print;
+
+var print=document.getElementById("age").value;
+document.getElementById("numero3").innerHTML=print;
+if (document.getElementById("maschio").checked==true)
+	{
+	var print=document.getElementById("maschio").value;
+	document.getElementById("numero4").innerHTML=print;
+	}	
+if (document.getElementById("femmina").checked==true)
+	{
+	var print=document.getElementById("femmina").value;
+	document.getElementById("numero5").innerHTML=print;
+	}
+if (document.getElementById("non mi identifico in nessun genere").checked==true)
+	{
+	var print=document.getElementById("non mi identifico in nessun genere").value;
+	document.getElementById("numero6").innerHTML=print;
+	}
+
+
+var print=document.getElementById("indirizzo").value;
+document.getElementById("numero7").innerHTML=print;
+
+var print=document.getElementById("città").value;
+document.getElementById("numero8").innerHTML=print;
+
+
+if (document.getElementById("subject1").checked==true)
+	{
+	var print=document.getElementById("subject1").value;
+	document.getElementById("numero9").innerHTML=print;
+	}
+if (document.getElementById("subject2").checked==true)
+	{
+	var print=document.getElementById("subject2").value;
+	document.getElementById("numero10").innerHTML=print;
+	}
+
+if (document.getElementById("subject3").checked==true)
+	{
+	var print=document.getElementById("subject3").value;
+	document.getElementById("numero11").innerHTML=print;
+	}
+if (document.getElementById("subject4").checked==true)
+	{
+	var print=document.getElementById("subject4").value;
+	document.getElementById("numero12").innerHTML=print;
+	}
+
+if (document.getElementById("subject5").checked==true)
+	{
+	var print=document.getElementById("subject5").value;
+	document.getElementById("numero13").innerHTML=print;
+	}
+
+if (document.getElementById("subject6").checked==true)
+	{
+	var print=document.getElementById("subject6").value;
+	document.getElementById("numero14").innerHTML=print;
+	}
+if (document.getElementById("province").checked==true)
+	{
+	var print=document.getElementById("province").value;
+	document.getElementById("numero15").innerHTML=print;
+	}
+}
+</script>
+
+
+<form>
+	<label for="name">name:</label><br>
+	<input type="text" id="name" name="name"><br>
+	<label for="surname">surname:</label><br>
+	<input type="text" id="surname" name="surname"><br>
+  	<label for="age">age:</label><br>
+	<input type="text" id="age" name="age"><br>
+<p>Sesso:</p>
+  <input type="radio" id="maschio" name="sesso" value="maschio">
+  <label for="maschio">maschio</label><br>
+  <input type="radio" id="femmina" name="sesso" value="femmina">
+  <label for="femmina">femmina</label><br>
+  <input type="radio" id="non mi identifico in nessun genere" name="sesso" value="non mi identifico in nessun genere">
+  <label for="non mi identifico in nessun genere">non mi identifico in nessun genere</label>
+
+<br><label for="indirizzo">indirizzo di appartenenza:</label><br>
+	<input type="text" id="indirizzo" name="indirizzo"><br>
+	<label for="città">città di appartenenza:</label><br>
+	<input type="text" id="città" name="città"><br>
+<br><label for="province">Provincia di cui fai parte:</label>
+  <select name="province" id="province">
+    	<option value="Ancona">Ancona</option>
+	<option value="Aosta">Aosta</option>
+        <option value="Bologna">Bologna</option>
+	<option value="Cagliari">Cagliari</option>
+	<option value="Campobasso">Campobasso</option>
+	<option value="Catanzaro">Catanzaro</option>
+	<option value="Firenze">Firenze</option>
+	<option value="Genova">Genova</option>
+	<option value="L'Aquila">L'Aquila</option>
+   	 <option value="Milano">Milano</option>
+   	 <option value="Napoli">Napoli</option>
+	<option value="Palermo>Palermo</option>
+	<option value="Perugia">Perugia</option>
+	<option value="Potenza">Potenza</option>
+    	<option value="Roma">Roma</option>
+	<option value="Taranto">Taranto</option>
+	<option value="Torino">Torino</option>
+	<option value="Trento">Trento</option>
+	<option value="Trieste">Trieste</option>
+ 	<option value="Venezia">Venezia</option>
+  </select>
+</form>
+
+<form>
+	<input type="checkbox" id="subject1" name="subject1" value="Italiano">
+  	<label for="subject1"> Italiano</label><br>
+  	<input type="checkbox" id="subject2" name="subject2" value="Storia">
+  	<label for="subject2"> Storia</label><br>
+	<input type="checkbox" id="subject3" name="subject3" value="Matematica">
+ 	<label for="subject3"> Matematica</label><br>
+  	<input type="checkbox" id="subject4" name="subject4" value="Inglese">
+  	<label for="subject4"> Inglese</label><br>
+  	<input type="checkbox" id="subject5" name="subject5" value="Informatica">
+  	<label for="subject5"> Informatica</label><br>
+  	<input type="checkbox" id="subject6" name="subject6" value="TPSIT">
+  	<label for="subject6"> TPSIT</label>
+	<br><input type="button" value="Clicca" onclick=stampa()>
+</form>
+<h3 id="numero1"></h3>
+<h3 id="numero2"></h3>
+<h3 id="numero3"></h3>
+<h3 id="numero4"></h3>
+<h3 id="numero5"></h3>
+<h3 id="numero6"></h3>
+<h3 id="numero7"></h3>
+<h3 id="numero8"></h3>
+<h3 id="numero9"></h3>
+<h3 id="numero10"></h3>
+<h3 id="numero11"></h3>
+<h3 id="numero12"></h3>
+<h3 id="numero13"></h3>
+<h3 id="numero14"></h3>
+<h3 id="numero15"></h3>
+</body>
+</html>
+
