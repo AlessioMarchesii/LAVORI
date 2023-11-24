@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>calculator</title>
+  </head>
+  <body>
+    <h3>calculator</h3>
+first number<br>
+    <input type="text" id="n1">
+      <br>
+   second number<br>
+    <input type="text1" id="n2">
+      <br>
+<input type="button" value="+" onclick=sum()>
+<input type="button" value="-" onclick=subtraction()>
+<input type="button" value="*" onclick=multiplication()>
+<input type="button" value="/" onclick=division()>
+<input type="button" value="%" onclick=module()>
+<input type="button" value="**" onclick=pow()>
+<input type="button" value=" √" onclick=root()>
+<p id="result"></p>
+<script>
+  function sum()
+{
+           let a = parseInt(document.getElementById("n1").value);
+let b= parseInt(document.getElementById("n2").value);
+         let sum=a + b;
+         document.getElementById("result").innerHTML = sum;
+   
+}
+ function subtraction()
+{
+         let a = parseInt(document.getElementById("n1").value);
+let b= parseInt(document.getElementById("n2").value);
+         let subtraction=a - b;
+         document.getElementById("result").innerHTML = subtraction;
+}
+ function multiplication()
+{
+          let a = parseInt(document.getElementById("n1").value);
+let b= parseInt(document.getElementById("n2").value);
+         let multiplication=a * b;
+         document.getElementById("result").innerHTML = multiplication;
+}
+ function division()
+{
+           let a = parseInt(document.getElementById("n1").value);
+let b= parseInt(document.getElementById("n2").value);
+
+         let division=a / b;
+         document.getElementById("result").innerHTML =division;
+}
+function module()
+{
+           let a = parseInt(document.getElementById("n1").value);
+let b= parseInt(document.getElementById("n2").value);
+
+         let module =a % b;
+         document.getElementById("result").innerHTML =module;
+}
+function pow()
+{
+           let a = parseInt(document.getElementById("n1").value);
+let b= parseInt(document.getElementById("n2").value);
+
+         let pow=Math.pow(a,b);
+         document.getElementById("result").innerHTML =pow;
+}
+function root()
+{
+           let a = parseInt(document.getElementById("n1").value);
+let b= parseInt(document.getElementById("n2").value);
+
+         let root=Math.sqrt(a);
+         document.getElementById("result").innerHTML =root;
+}
+
+
+</script>
+  </body>
+</html>
