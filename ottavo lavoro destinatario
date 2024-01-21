@@ -1,0 +1,8 @@
+<html>
+<body>
+<div id="printarray"></div>
+<script>
+ document.getElementById("printarray").innerHTML = localStorage.getItem("dati");
+</script>
+</body>
+</html>
