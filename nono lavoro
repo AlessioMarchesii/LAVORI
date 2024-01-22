@@ -1,0 +1,53 @@
+<html>
+    <head>
+      <script>
+      function espressioniRegolari()
+          {
+          let email = document.getElementById('email').value;
+              if(controllore = email.match(/[@]/g))
+              {
+              alert("email valida");
+              }
+              else
+              {
+              alert("email non valida!");
+              }
+          }
+      </script>
+      <style>
+            h1
+            {
+                font-family: arial;
+                font-size: 310%;
+                color:purple;
+            }
+            h3
+            {
+                font-family: arial;
+                font-size: 110%;
+                color: blue;
+            }
+            p
+            {
+                font-family: arial;
+                font-size: 110%;
+                color: pink;
+            }
+            p2
+            {
+                font-family: arial;
+                font-size: 90%;
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>Espressioni regolari</h1>
+    <br><br>
+    <p>Inserisci una mail </p>
+    <input type="text" id="inserimentoMail"><br><br><br>
+    <p2></p2><br><br>
+    <button type="submit" id="Pulsante" onclick="espressioniRegolari()" value="EffettuaIlControlloCheSiaUnaMail">Effettua il controllo che sia una mail</button><br><br>
+    <p id="risultatoControllo"></p>
+    </body>
+  </html>
