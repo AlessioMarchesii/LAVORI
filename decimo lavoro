@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Verifica del codice fiscale</title>
+    <script>
+        function validaCodiceFiscale() {
+            var codiceFiscale = document.getElementById('codiceFiscale').value;
+            var regex = /^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$/;
+
+            if (regex.test(codiceFiscale)) {
+                alert('codice fiscale corretto!');
+            }
+ else {
+                alert('codice fiscale errato!');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Verifica del codice fiscale</h2>
+    <label for="codiceFiscale">Inserisci il codice:</label>
+    <input type="text" id="codiceFiscale" name="codiceFiscale">
+    <button onclick="validaCodiceFiscale()">Verifica del codice fiscale</button>
+</body>
+</html>
