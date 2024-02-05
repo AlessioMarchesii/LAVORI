@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>paragrafi e caselle di testo</title>
+ <h2> <font face="arial">Paragrafi e caselle di testo</font> </h2><br>
+</head>
+<body>
+    <body bgcolor="#ee82ee"></body>
+
+  <label for="numeroParagrafo">scegli il numero del paragrafo da 1 a 10:</label>
+  <input type="number" id="numeroParagrafo" min="1" max="10">
+
+  <label for="testoParagrafo">aggiungi il testo che vuoi inserire:</label>
+  <input type="text" id="testoParagrafo">
+
+  <button onclick="aggiornaParagrafo()">aggiornamento</button>
+
+  <div id="contenitoreParagrafi">
+   
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+  </div>
+
+  <script>
+    function aggiornaParagrafo() {
+     
+      var numeroParagrafo = document.getElementById("numeroParagrafo").value;
+      var testoParagrafo = document.getElementById("testoParagrafo").value;
+
+   
+      if (numeroParagrafo >= 1 && numeroParagrafo <= 10) {
+       
+        var paragrafo = document.getElementsByTagName("p")[numeroParagrafo - 1];
+        paragrafo.innerHTML = testoParagrafo;
+      } else {
+        alert("paragrafo inesistente");
+      }
+    }
+  </script>
+
+</body>
+</html>
