@@ -1,0 +1,51 @@
+<html >
+<head>
+<title>casella di selezione multipla, quattro radio button ed un paragrafo</title>
+<style>
+h1
+          {
+              font-family: "Arial";
+              font-size: 350%;
+              color: purple;
+          }
+ h3
+          {
+              font-family: Verdana;
+              font-size: 110%;
+              color: orangered;
+          }
+</style>
+
+</head>
+<body>
+<h1>casella di selezione multipla, quattro radio button ed un paragrafo</h1>
+
+<h3>alessio marchesi</h3>
+
+<select id="colorSelect" onchange="changeColor()">
+  <option value="blue">Blu</option>
+  <option value="red">Rosso</option>
+  <option value="green">Verde</option>
+</select>
+
+<br><br>
+
+<input type="radio" name="fontSize" onclick="changeFontSize(14)">small size
+<input type="radio" name="fontSize" onclick="changeFontSize(16)" checked>middle size
+<input type="radio" name="fontSize" onclick="changeFontSize(18)">big size
+
+<p id="myParagraph">eccoti l'esempio!</p>
+
+<script>
+  function changeColor() {
+    var color = document.getElementById("colorSelect").value;
+    document.getElementById("myParagraph").style.color = color;
+  }
+
+  function changeFontSize(size) {
+    document.getElementById("myParagraph").style.fontSize = size + "px";
+  }
+</script>
+
+</body>
+</html>
