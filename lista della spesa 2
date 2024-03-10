@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Lista della spesa</title>
+<style>
+h3
+          {
+              font-family: "Brush Script MT";
+              font-size: 350%;
+              color: green;
+          }
+</style>
+</head>
+<body>
+  <h3>ecco la lista!</h3>
+  <div id="inputPage">
+      
+  </div>
+  <button type="button" onclick="window.history.back()">torna indietro </button>
+
+    <script>
+
+    var items = [];
+    
+   
+              items = location.search.split("=")[1].split(",") 
+
+    for (let i = 0; i < items.length; i++) {
+      
+      const item = items[i]; //prendi l'item corrente
+      const itemElement = document.createElement("span");
+      itemElement.textContent = item + "    "; 
+      
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Elimina";
+        deleteButton.onclick = function () { elimina(i); };
+        
+    
+     
+      var container = document.getElementById("inputPage");
+      container.appendChild(itemElement);
+      container.appendChild(deleteButton);
+      container.appendChild(document.createElement("br"));
+      
+    }
+
+    function elimina(index) {
+      items.splice(index, 1);
+      var container = document.getElementById("inputPage");
+      container.innerHTML = "";
+       for (let i = 0; i < items.length; i++) {
+
+        const item = items[i]; 
+        const itemElement = document.createElement("span");  
+        itemElement.textContent = item + "    "; 
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Elimina";
+        deleteButton.onclick = function () { elimina(i); };
+
+
+        var container = document.getElementById("inputPage");
+        container.appendChild(itemElement);
+        container.appendChild(deleteButton);
+        container.appendChild(document.createElement("br"));
+
+      }
+    }
+
+    
+
+</script>
+
+</body>
+</html>
