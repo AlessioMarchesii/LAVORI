@@ -1,0 +1,44 @@
+<html >
+<head>
+<title>Lista della spesa</title>
+<style>
+h3
+          {
+              font-family: "Brush Script MT";
+              font-size: 350%;
+              color: green;
+          }
+</style>
+</head>
+<body>
+
+<div id="inputPage">
+  <h3>Lista della spesa</h3>
+  <form id="inputForm">
+    <input type="text" id="itemInput" placeholder="aggiungi un elemento">
+    <button type="button" onclick="addItem()">Inserisci nella lista</button>
+    <button type="button" onclick="showNextPage()">visualizza elementi aggiunti nella lista</button>
+  </form>
+</div>
+
+
+<script>
+let items = [];
+function addItem() {
+  const itemInput = document.getElementById("itemInput");
+  const item = itemInput.value.trim();
+  if (item !== "") {
+    items.push(item);
+    itemInput.value = "";
+  }
+
+}
+
+function showNextPage() {
+  const url = "list2.html?items=" + items.join(",");
+  window.location.href = url;
+}
+</script>
+
+</body>
+</html>
