@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Generazione dinamica di una tabella HTML con numeri casuali</title>
+<style>
+h3
+          {
+              font-family: "Brush Script MT";
+              font-size: 350%;
+              color: orange;
+          }
+</style>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+<h3>Generazione dinamica di una tabella HTML con numeri casuali</h3>
+<label for="inputRighe">Inserisci il numero di righe:</label>
+<input type="text" id="inputRighe">
+<label for="inputColonne">Inserisci il numero di colonne:</label>
+<input type="text" id="inputColonne">
+<button onclick="creaTabella()">Genera Tabella</button>
+<div id="tabellaContainer"></div>
+
+<script>
+function creaTabella() {
+  var inputRighe = document.getElementById('inputRighe').value;
+  var inputColonne = document.getElementById('inputColonne').value;
+  
+  if (isNaN(inputRighe) || isNaN(inputColonne) || inputRighe <= 0 || inputColonne <= 0) {
+    alert('Inserisci un numero valido di righe e colonne.');
+    return;
+  }
+
+  var righe = parseInt(inputRighe);
+  var colonne = parseInt(inputColonne);
+
+  var tabella = document.createElement('table');
+  var tabellaContainer = document.getElementById('tabellaContainer');
+
+  for (var i = 0; i < righe; i++) {
+    var riga = tabella.insertRow();
+    for (var j = 0; j < colonne; j++) {
+      var cella = riga.insertCell();
+      var numeroCasuale = Math.floor(Math.random() * 100) + 1;
+      cella.innerHTML = numeroCasuale;
+    }
+  }
+
+  tabellaContainer.innerHTML = '';
+  tabellaContainer.appendChild(tabella);
+}
+</script>
+
+</body>
+</html>
