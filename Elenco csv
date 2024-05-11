@@ -1,0 +1,61 @@
+<html>
+<head>
+ 
+    <title>Elenco csv</title>
+<style>
+h3
+          {
+              font-family: "Brush Script MT";
+              font-size: 350%;
+              color: red;
+          }
+</style>
+</head>
+<body>
+<h3>Elenco csv</h3>
+
+    <input type="file" id="fileInput" accept=".csv">
+    <div id="tableContainer"></div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const csvData = e.target.result;
+                const rows = csvData.split('\n');
+
+                let tableHtml = '<tabl
+
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const csvData = e.target.result;
+                const rows = csvData.split('\n');
+
+                let tableHtml = '<table border="1">';
+                rows.forEach(function(row) {
+                    tableHtml += '<tr>';
+                    const columns = row.split(',');
+                    columns.forEach(function(column) {
+                        tableHtml += '<td>' + column + '</td>';
+                    });
+                    tableHtml += '</tr>';
+                });
+                tableHtml += '</table>';
+
+                document.getElementById('tableContainer').innerHTML = tableHtml;
+            };
+
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>
