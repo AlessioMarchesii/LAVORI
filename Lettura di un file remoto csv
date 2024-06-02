@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+    <title>Lettura di un file remoto csv</title>
+<style>
+h3
+          {
+              font-family: "Brush Script MT";
+              font-size: 350%;
+              color: blue;
+          }
+</style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body{
+            padding-top: 50px;
+        }
+        #container {
+            margin-top: 50px;
+            width: 80%; 
+            height: 30%; 
+        }
+    </style>
+</head>
+<body>
+    <center>
+<h3>Lettura di un file remoto csv</h3>
+        <div id="container">
+            <canvas id="graficoTemperature"> </canvas>
+        </div>
+       
+    </center>
+    
+
+    <script>
+        
+        window.onload = caricaFileCSV;
+
+        
+        function caricaFileCSV() {
+            
+            var richiesta = new XMLHttpRequest();
+            
+           
+            richiesta.open('GET', 'https://raw.githubusercontent.com/jbrownlee/Datasets/master/monthly-mean-temp.csv', true);
+            
+            
+            richiesta.onreadystatechange = function() {
+                
+                if (richiesta.readyState === 4 && richiesta.status === 200) {
+                    
+                    var testoCSV = richiesta.responseText;
+                    
+                    mostraGrafico(testoCSV);
+                }
+            };
+            
+           
+            richiesta.send();
+        }
+
+        
+        function mostraGrafico(text) {
+            
+            const righe = text.split('\n').slice(1); 
+            
+            const etichette_anni = [];
+            const temperature = [];
+            let j = 0
+            
+            for (let i = 0; i < righe.length; i=i+12) {
+                
+                const colonne = righe[i].split(','); 
+                etichette_anni[j] = colonne[0]; 
+                temperature[j] = parseFloat(colonne[1]); 
+                j++;
+            }
+            creaGrafico(etichette_anni, temperature); 
+        }
+
+     
+        function creaGrafico(etichette, temperature) {
+            var ctx = document.getElementById('graficoTemperature').getContext('2d');
+            var graficoTemperature = new Chart(ctx, {
+                type: 'line', 
+                data: {
+                    labels: etichette, 
+                    datasets: [{
+                        label: 'VARIATION',
+                        data: temperature, 
+                        borderColor: 'rgba(10, 90, 130, 1)',
+                        backgroundColor: 'rgba(10,90, 130, 0.2)',
+                        fill: true, 
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'YEAR' 
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'DEGREES' 
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
