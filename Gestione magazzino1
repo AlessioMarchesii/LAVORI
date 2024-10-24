@@ -1,0 +1,87 @@
+codice HTML
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabella Prodotti</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lista Prodotti</h1>
+<table id="tabellaProdotti">
+    <thead>
+        <tr>
+            <th>Nome Prodotto</th>
+            <th>Quantità</th>
+            <th>Prezzo (Euro)</th>
+            <th>Totale (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dati prodotti saranno inseriti qui -->
+    </tbody>
+</table>
+
+<script>
+function caricaProdotti() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'prodotti.json', true); 
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var prodotti = JSON.parse(xhr.responseText);
+            var tabella = document.getElementById('tabellaProdotti').getElementsByTagName('tbody')[0];
+            prodotti.forEach(function(prodotto) {
+                var nuovaRiga = tabella.insertRow();
+                var cellaNome = nuovaRiga.insertCell(0);
+                cellaNome.textContent = prodotto.nome;
+                var cellaQuantita = nuovaRiga.insertCell(1);
+                cellaQuantita.textContent = prodotto.quantita;
+                var cellaPrezzo = nuovaRiga.insertCell(2);
+                cellaPrezzo.textContent = prodotto.prezzo;
+                var cellaTotale = nuovaRiga.insertCell(3);
+                var totale = prodotto.quantita * prodotto.prezzo;
+                cellaTotale.textContent = totale.toFixed(2) + " €";
+            });
+        } else {
+            console.error('Errore durante il caricamento del file JSON.');
+        }
+    };
+    xhr.send();
+}
+window.onload = function() {
+    caricaProdotti();
+};
+</script>
+
+</body>
+</html>
+codice JSON
+[
+  {
+    "nome": "panino",
+    "quantita": 5,
+    "prezzo": 10
+  },
+  {
+    "nome": "carne ",
+    "quantita": 3,
+    "prezzo": 20
+  },
+  {
+    "nome": "arance",
+    "quantita": 7,
+    "prezzo": 15
+  }
+]
