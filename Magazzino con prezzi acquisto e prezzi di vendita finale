@@ -1,0 +1,139 @@
+file HTML
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabella Prodotti</title>
+    <style>
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        #calcoloGuadagno {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lista Prodotti</h1>
+<table id="tabellaProdotti">
+    <thead>
+        <tr>
+            <th>Nome Prodotto</th>
+            <th>Quantità</th>
+            <th>Prezzo (Euro)</th>
+            <th>Totale (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dati prodotti saranno inseriti qui -->
+    </tbody>
+</table>
+
+<!-- Sezione per inserire la percentuale di ricarico e calcolare il guadagno -->
+<div id="calcoloGuadagno">
+    <label for="percentualeRicarico">Inserisci la percentuale di ricarico (%): </label>
+    <input type="number" id="percentualeRicarico" min="0" placeholder="Percentuale">
+    <button onclick="calcolaPrezziVendita()">Calcola Prezzo di Vendita e Guadagno</button>
+</div>
+
+<!-- Tabella per visualizzare il prezzo di vendita e guadagno -->
+<table id="tabellaVendita" style="display:none;">
+    <thead>
+        <tr>
+            <th>Nome Prodotto</th>
+            <th>Prezzo di Acquisto</th>
+            <th>Prezzo di Vendita</th>
+            <th>Guadagno (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dati calcolati saranno inseriti qui -->
+    </tbody>
+</table>
+<script>
+function caricaProdotti() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'prodotti.json', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var prodotti = JSON.parse(xhr.responseText)
+            var tabella = document.getElementById('tabellaProdotti').getElementsByTagName('tbody')[0];
+            prodotti.forEach(function(prodotto) {
+                var nuovaRiga = tabella.insertRow();
+                var cellaName = nuovaRiga.insertCell(0);
+                cellaNome.textContent = prodotto.nome;
+                var cellaQuantita = nuovaRiga.insertCell(1);
+                cellaQuantita.textContent = prodotto.quantita;
+                var cellaPrezzo = nuovaRiga.insertCell(2);
+                cellaPrezzo.textContent = prodotto.prezzo;
+                var cellaTotale = nuovaRiga.insertCell(3);
+                var totale = prodotto.quantita * prodotto.prezzo;
+                cellaTotale.textContent = totale.toFixed(2) + " €";
+                nuovaRiga.dataset.prodotto = JSON.stringify(prodotto);
+            });
+        } else {
+            console.error('Errore durante il caricamento del file JSON.');
+        }
+    };
+    xhr.send();
+}
+function calcolaPrezziVendita() {
+    var percentualeRicarico = document.getElementById('percentualeRicarico').value;
+    if (percentualeRicarico === "") {
+        alert("Inserisci una percentuale di ricarico valida.");
+        return;
+    }
+    percentualeRicarico = parseFloat(percentualeRicarico);
+    var tabellaVendita = document.getElementById('tabellaVendita');
+    tabellaVendita.style.display = 'table';
+    var corpoTabella = tabellaVendita.getElementsByTagName('tbody')[0];
+    corpoTabella.innerHTML = ""; 
+    var righeProdotti = document.getElementById('tabellaProdotti').getElementsByTagName('tbody')[0].rows;
+    for (var i = 0; i < righeProdotti.length; i++) {
+        var prodotto = JSON.parse(righeProdotti[i].dataset.prodotto);
+        var nuovaRigaVendita = corpoTabella.insertRow();
+        var cellaNome = nuovaRigaVendita.insertCell(0);
+        cellaNome.textContent = prodotto.nome;
+        var cellaPrezzoAcquisto = nuovaRigaVendita.insertCell(1);
+        cellaPrezzoAcquisto.textContent = prodotto.prezzo.toFixed(2) + " €";
+        var prezzoVendita = prodotto.prezzo + (prodotto.prezzo * percentualeRicarico / 100);
+        var cellaPrezzoVendita = nuovaRigaVendita.insertCell(2);
+        cellaPrezzoVendita.textContent = prezzoVendita.toFixed(2) + " €";
+        var guadagno = prezzoVendita - prodotto.prezzo;
+        var cellaGuadagno = nuovaRigaVendita.insertCell(3);
+        cellaGuadagno.textContent = guadagno.toFixed(2) + " €";
+    }
+}
+window.onload = function() {
+    caricaProdotti();
+};
+</script>
+
+</body>
+</html>
+codice JSON
+[
+  {
+    "nome": "panino",
+    "quantita": 5,
+    "prezzo": 10
+  },
+  {
+    "nome": "carne ",
+    "quantita": 3,
+    "prezzo": 20
+  },
+  {
+    "nome": "arance",
+    "quantita": 7,
+    "prezzo": 15
+  }
+]
