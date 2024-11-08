@@ -1,0 +1,94 @@
+
+<html>
+<body>
+
+<h2>Magazzino dei prodotti</h2>
+
+<table id="a"></table>
+<input id="b" type="button" onclick="Leggi();" value="Lettura dei dati">
+
+
+<script>
+function Leggi() {
+    let dati = new XMLHttpRequest();
+    
+   dati.open("GET", "http://localhost/data.json", true); 
+   
+    dati.send(); 
+
+    dati.onload = function() {
+        if (dati.status === 200) { 
+            const object = JSON.parse(dati.responseText);
+
+            let str = "<tr><th>Nome</th><th>Categoria</th><th>Prezzo</th><th>Quantita</th><th>Totale</th></tr>";
+
+            for (let i = 0; i < object.magazzino.length; i++) { 
+                str += "<tr><td>" + object.magazzino[i].nome + "</td><td>" + 
+                        object.magazzino[i].categoria +"</td><td>" + 
+                        object.magazzino[i].prezzo +"</td><td>" + 
+                        object.magazzino[i].quantita +"</td><td>" + 
+                        (object.magazzino[i].prezzo * object.magazzino[i].quantita) + 
+                        "<td><a href =" + object.magazzino[i].img> + "</a><img src = "+ object.magazzino[i].img + "style=width:300;height:200>" + "</img></td>"
+            }
+            
+            document.getElementById("a").innerHTML = str; 
+        } else {
+            alert("Errore nel caricamento del file: " + dati.status); 
+        }
+        document.getElementById("b").disabled = false; 
+    };
+
+    document.getElementById("b").disabled = true;
+}
+</script>
+
+</body>
+</html>
+
+{
+    "magazzino": [{
+            "nome": "pesce",
+            "categoria": "pescheria",
+            "prezzo": 30,
+            "quantita": 3,
+            "img": "https://pescheria.scelteperte.it/wp-content/uploads/2020/05/orata-scelte-per-te-pescheria.jpg"
+        },
+        {
+            "nome": "carne ",
+            "categoria": "macelleria",
+            "prezzo": 27,
+            "quantita": 5,
+            "img": "https://www.carnisostenibili.it/wp-content/uploads/2017/12/Come-scegliere-la-carne-al-banco.jpg"
+
+        },
+        {
+            "nome": "arance",
+            "categoria": "frutta",
+            "prezzo": 6,
+            "quantita": 12,
+            "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKHbmnSmxUU5EI3MBAoVUvDfnccNgWJKLzdGUn8v3ckl4rMuqotA3YZ_KGsqI0hA-0_7hkIPYL2XoKj-IFQlO70HWNjYKtO-tk9_jZq5-K00s8rFE7UEO2AZUV6v-qqrBi_otfnHvhhvI/s1600/aranciasanguinellaSpagna.jpg"
+
+        },
+        {
+            "nome": "patatine",
+            "categoria": "salatini",
+            "prezzo": 16,
+            "quantita": 5,
+            "img": "https://www.greenme.it/wp-content/uploads/2020/09/patatine-test.jpg"
+        },
+        {
+            "nome": "rigatoni",
+            "categoria": "pasta",
+            "prezzo": 12,
+            "quantita": 4,
+            "img": "https://www.greenme.it/wp-content/uploads/2023/10/pasta-supermercato.jpg"
+        },
+        {
+            "nome": "baguette",
+            "categoria": "pane",
+            "prezzo": 10,
+            "quantita": 30,
+            "img": "https://media-assets.lacucinaitaliana.it/photos/61fb121c207106e34c3d0989/16:9/w_2560%2Cc_limit/baguette-iper.jpg"
+        }
+    ]
+}
