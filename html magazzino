@@ -1,0 +1,99 @@
+<html>
+<head>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: red;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    input[type="button"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    input[type="button"]:hover {
+        background-color: #45a049;
+    }
+
+    img {
+        width: 150px;
+        height: auto;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Magazzino</h2>
+
+<table id="a"></table>
+<input id="b" type="button" onclick="Leggi();" value="Lettura dei dati">
+
+<script>
+function Leggi() {
+    let dati = new XMLHttpRequest();
+    
+    dati.open("GET", "http://localhost/data.json", true); 
+    dati.send(); 
+
+    dati.onload = function() {
+        if (dati.status === 200) { 
+            const object = JSON.parse(dati.responseText);
+
+            let str = "<tr><th>Nome</th><th>Categoria</th><th>Prezzo</th><th>Quantità</th><th>Totale</th><th>Immagine</th></tr>";
+
+            for (let i = 0; i < object.magazzino.length; i++) { 
+                str += "<tr><td>" + object.magazzino[i].nome + "</td><td>" + 
+                        object.magazzino[i].categoria + "</td><td>" + 
+                        object.magazzino[i].prezzo + "</td><td>" + 
+                        object.magazzino[i].quantita + "</td><td>" + 
+                        (object.magazzino[i].prezzo * object.magazzino[i].quantita) + 
+                        "</td><td><a href='" + object.magazzino[i].img + "' target='_blank'><img src='" + 
+                        object.magazzino[i].img + "'></a></td></tr>";
+            }
+            
+            document.getElementById("a").innerHTML = str; 
+        } else {
+            alert("Errore nel caricamento del file: " + dati.status); 
+        }
+        document.getElementById("b").disabled = false; 
+    };
+
+    document.getElementById("b").disabled = true;
+}
+</script>
+
+</body>
+</html>
