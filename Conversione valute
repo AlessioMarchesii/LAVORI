@@ -1,0 +1,35 @@
+async function getExchangeRates() {
+    try {
+        let response = await fetch('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
+        let text = await response.text();
+        
+        let parser = new DOMParser();
+        let xmlDoc = parser.parseFromString(text, "text/xml");
+
+        let rates = {};
+        let cubes = xmlDoc.querySelectorAll("Cube[currency]");
+        
+        cubes.forEach(cube => {
+            let currency = cube.getAttribute("currency");
+            let rate = parseFloat(cube.getAttribute("rate"));
+            rates[currency] = rate;
+        });
+
+        return rates;
+    } catch (error) {
+        console.error("Errore nel recupero dei tassi di cambio:", error);
+    }
+}
+
+async function convertEuroTo(currency, amount) {
+    let rates = await getExchangeRates();
+    
+    if (rates && rates[currency]) {
+        let convertedAmount = amount * rates[currency];
+        console.log(`${amount} EUR = ${convertedAmount.toFixed(2)} ${currency}`);
+    } else {
+        console.log("Valuta non trovata!");
+    }
+}
+
+convertEuroTo("USD", 50);
