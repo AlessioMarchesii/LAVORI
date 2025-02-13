@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco dei Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #post-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #post-list li {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Elenco dei Post</h1>
+    <ul id="post-list"></ul>
+
+    <script>
+        const url = 'https://example.com/wp-json/wp/v2/posts';  // Sostituire con l'URL del sito WordPress
+
+        function getPosts() {
+            fetch(url)
+                .then(response => response.json())
+                .then(posts => {
+                    const postList = document.getElementById('post-list');
+                    postList.innerHTML = '';  // Pulisce la lista precedente
+
+                    posts.forEach(post => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <h3>${post.title.rendered}</h3>
+                            <p>${post.excerpt.rendered}</p>
+                            <a href="${post.link}" target="_blank">Leggi di più</a>
+                        `;
+                        postList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Errore nel recuperare i post:', error);
+                });
+        }
+
+        window.onload = getPosts;
+    </script>
+</body>
+</html>
