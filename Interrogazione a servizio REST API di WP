@@ -1,59 +1,106 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elenco dei Post</title>
+    <title>RESTful API</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        body 
+        {
+            font-family: 'Verdana', Times, serif;
             margin: 20px;
+            background-color: rgb(10, 3, 3);
+            text-align: center;
+            color: white;
         }
-        h1 {
-            color: #333;
-        }
-        #post-list {
+
+        ul 
+        {
             list-style-type: none;
             padding: 0;
         }
-        #post-list li {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            margin: 10px 0;
+
+        li 
+        {
+            background-color: blue;
+            margin: 10px auto;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            color: black;
+            width: 60%;
+        }
+
+        a 
+        {
+            text-decoration: none;
+            color: pink;
+            font-weight: bold;
+        }
+
+        a:hover 
+        {
+            color: #d2afff;
+        }
+
+        table 
+        {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: blue;
+            color: black;
+        }
+
+        th, td 
+        {
             padding: 10px;
+            border: 1px solid black;
+        }
+
+        th 
+        {
+            background: #444;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <h1>Elenco dei Post</h1>
-    <ul id="post-list"></ul>
+    <h1>RESTful API</h1>
+    <img src="" width="1450" height="300" />
+    
+    
+    
+    <table id="demo">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 
     <script>
-        const url = 'https://example.com/wp-json/wp/v2/posts';  // Sostituire con l'URL del sito WordPress
-
-        function getPosts() {
-            fetch(url)
-                .then(response => response.json())
-                .then(posts => {
-                    const postList = document.getElementById('post-list');
-                    postList.innerHTML = '';  // Pulisce la lista precedente
-
-                    posts.forEach(post => {
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = `
-                            <h3>${post.title.rendered}</h3>
-                            <p>${post.excerpt.rendered}</p>
-                            <a href="${post.link}" target="_blank">Leggi di più</a>
-                        `;
-                        postList.appendChild(listItem);
-                    });
-                })
-                .catch(error => {
-                    console.error('Errore nel recuperare i post:', error);
-                });
-        }
-
-        window.onload = getPosts;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                var Obj = JSON.parse(this.responseText);
+                var string = "";
+                for (var x in Obj) 
+                {
+                    if (Obj[x].title && Obj[x].title.rendered) 
+                    {
+                        string += "<tr><td>" + obj[x].id + "</td><td>" + Obj[x].title.rendered + "</td></tr>";
+                    }
+                }
+                document.querySelector("#demo tbody").innerHTML = string;
+            }
+        };
+        xmlhttp.open("GET", "https://www.desrparcosud.it/wp-json/wp/v2/posts?search=AMAP", true);
+        xmlhttp.send();
     </script>
+<h1>Lavoro svolto da Alessio Marchesi</h1>
 </body>
 </html>
