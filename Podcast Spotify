@@ -1,0 +1,63 @@
+<html >
+<head>
+    <title>Podcast Spotify</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Podcast Spotify</h1>
+        <ul>
+            <li>
+                <h2>Canzone 1 </h2>
+                <a href="https://spotify.com/spotify-link-1" target="_blank">Ascolta su Spotify</a>
+            </li>
+            <li>
+                <h2>Canzone 2 </h2>
+                <a href="https://spotify.com/spotify-link-3" target="_blank">Ascolta su Spotify</a>
+            </li>
+            <li>
+                <h2>Canzone 3</h2>
+                <a href="https://spotify.com/spotify-link-5" target="_blank">Ascolta su Spotify</a>
+            </li>
+          
+        </ul>
+    </div>
+
+</body>
+<h3>Lavoro svolto da Alessio Marchesi</h3>
+</html>
