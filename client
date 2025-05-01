@@ -1,0 +1,18 @@
+<form method="post" action="">
+    <label for="name">Inserisci il tuo nome:</label>
+    <input type="text" name="name" id="name">
+    <input type="submit" value="Invia">
+</form>
+
+<?php
+if (isset($_POST['name']) && !empty($_POST['name'])) {
+    $wsdl_url = "http://localhost/soap/test.wsdl";
+    try {
+        $client = new SoapClient($wsdl_url);
+        $response = $client->sayHello(htmlentities($_POST['name']));
+        echo "<p><strong>Risposta dal server SOAP:</strong> " . $response . "</p>";
+    } catch (SoapFault $e) {
+        echo "<p>Errore: " . $e->getMessage() . "</p>";
+    }
+}
+?>
