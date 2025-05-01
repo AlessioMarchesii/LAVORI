@@ -1,0 +1,10 @@
+<?php
+function sayHello($name) {
+    $salutation = "Ciao " . $name . ", funziona!";
+    return $salutation;
+}
+
+$server = new SoapServer("http://localhost/soap/test.wsdl"); 
+$server->addFunction("sayHello");
+$server->handle();
+?>
